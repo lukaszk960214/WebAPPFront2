@@ -1,6 +1,7 @@
 import React from 'react';
 import TrelloList from "./TrelloList";
 import {connect} from "react-redux";
+import TrelloActionButton from "./TrelloActionButton";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,8 +21,14 @@ class App extends React.Component {
         <h2>Task manager</h2>
         <div style={styles.listsContainer}>
         {lists.map(list => (
-        <TrelloList title={list.title} cards={list.cards} />
+        <TrelloList 
+        listId={list.id} 
+        key={list.id} 
+        title={list.title} 
+        cards={list.cards} 
+        />
         ))}
+        <TrelloActionButton list />
         </div>
       </div>
     );
