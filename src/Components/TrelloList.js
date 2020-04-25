@@ -1,7 +1,7 @@
 import React from "react";
 import TrelloCard from "./TrelloCard";
 import TrelloActionButton from "./TrelloActionButton";
-import {Droppable} from "react-beautiful-dnd";
+import {Droppable,Draggable} from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const ListContainer =styled.div`
@@ -13,25 +13,36 @@ const ListContainer =styled.div`
     margin-right:8px;
 `;
 
-const TrelloList=({title, cards, listId})=> {
+const TrelloList=({title, cards, listId,index})=> {
     return(
-    <Droppable droppableId={String(listId)}>
-        {provided=>(
-            
-            <ListContainer {...provided.droppableProps} ref={provided.innerRef} >
-            <h4>{title}</h4>
-            {cards.map((card, index)=> (
-            <TrelloCard 
-            key={card.id} 
-            index={index} 
-            text={card.text} 
-            id={card.id}/>
-            ))}
-            <TrelloActionButton  listId={listId}/>
-        {provided.placeholder}
-        </ListContainer>
-        )}
-    </Droppable> 
+        <Draggable draggableId={String(listId)} index={index}>
+                {provided => (
+                    <ListContainer {...provided.draggableProps}
+                     ref={provided.innerRef} 
+                     {...provided.dragHandleProps} >
+                      <Droppable droppableId={String(listId)}>
+                      {provided=>(
+                           <div {...provided.droppableProps} ref={provided.innerRef}>
+
+                           
+                         
+                          <h4>{title}</h4>
+                          {cards.map((card, index)=> (
+                          <TrelloCard 
+                          key={card.id} 
+                          index={index} 
+                          text={card.text} 
+                          id={card.id}/>
+                          ))}
+                          <TrelloActionButton  listId={listId}/>
+                      {provided.placeholder}
+                      </div>
+                      )}
+                  </Droppable> 
+                  </ListContainer>
+                )}
+         </Draggable>
+
     );
 };
 
