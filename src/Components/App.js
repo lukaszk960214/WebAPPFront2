@@ -3,20 +3,41 @@ import TrelloList from "./TrelloList";
 import {connect} from "react-redux";
 import TrelloActionButton from "./TrelloActionButton";
 import { DragDropContext} from "react-beautiful-dnd";
+import { sort } from "../actions";
+import styled from "styled-components";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import { emphasize } from '@material-ui/core';
 
 //import {TodoList} from './TodoList';
+const ListContainer=styled.div`
+  display:flex;
+  flex-direction:row;
+`;
 
 class App extends React.Component {
 
-onDragEnd=()=>{
-  // TODO: reordering logic
-}
+onDragEnd=(result)=>{
+ const {destination, source, draggableId}=result;
+
+ if(!destination) {
+   return;
+ }
+this.props.dispatch(
+  sort(
+  source.droppableId,
+  destination.droppableId,
+  source.index,
+  destination.index,
+  draggableId
+  )
+)
+};
+
 
   render() {
 
@@ -25,7 +46,7 @@ onDragEnd=()=>{
       <DragDropContext onDragEnd={this.onDragEnd}>
       <div className="App">
         <h2>Task manager</h2>
-        <div style={styles.listsContainer}>
+        <ListContainer>
         {lists.map(list => (
         <TrelloList 
         listId={list.id} 
@@ -35,7 +56,7 @@ onDragEnd=()=>{
         />
         ))}
         <TrelloActionButton list />
-        </div>
+        </ListContainer>
       </div>
       </DragDropContext>
     );
