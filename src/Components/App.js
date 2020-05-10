@@ -64,7 +64,30 @@ this.props.dispatch(
               </ListContainer>
           )}
         </Droppable>
-      
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Register</a>
+          </li>
+        </ul>  
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <label className="text-uppercase">Login:</label>
+                <input type="text" required />
+                <label className="text-uppercase">Password:</label>
+                <input type="text" required />
+                <input id="sendForm" type="submit" value="Send" />
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <label className="text-uppercase">Login:</label>
+                <input type="text" required />
+                <label className="text-uppercase">Password:</label>
+                <input type="text" required />
+                <input id="sendForm" type="submit" value="Register User" />
+            </div>
+          </div>      
       </div>
       </DragDropContext>
     );
