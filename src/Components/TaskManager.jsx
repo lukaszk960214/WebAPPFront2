@@ -5,10 +5,11 @@ import TrelloActionButton from "./TrelloActionButton";
 import { DragDropContext,Droppable} from "react-beautiful-dnd";
 import { sort } from "../actions";
 import styled from "styled-components";
+import './TodoList/taskmanager.css';
 
-const ListContainer=styled.div`
-  display:flex;
-  flex-direction:row;
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 class TaskManager extends React.Component {
@@ -37,26 +38,34 @@ class TaskManager extends React.Component {
         const { lists } = this.props;
         return(
           <DragDropContext onDragEnd={this.onDragEnd}>
-          <div className="App">
-            <h2>Task manager</h2>
-            <Droppable droppableId="all-lists" direction = "horizontal" type="list">
-              {provided =>(
-                  <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-                  {lists.map((list,index) => (
-                  <TrelloList 
-                  listId={list.id} 
-                  key={list.id} 
-                  title={list.title} 
-                  cards={list.cards} 
-                  index={index}
-                  />
-                  ))}
-                  {provided.placeholder}
-                  <TrelloActionButton list />
-                  </ListContainer>
-              )}
-            </Droppable>    
-          </div>
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col">
+                <div className="App">
+                    <header class="m-0 navbar bg-success">
+                      <h2 class="m-0 p-2 navbar-brand"><b class="text-light">task<span class="main-color">Manager</span></b></h2>
+                    </header>
+                    <Droppable droppableId="all-lists" direction = "horizontal" type="list">
+                      {provided =>(
+                          <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+                          {lists.map((list,index) => (
+                          <TrelloList 
+                          listId={list.id} 
+                          key={list.id} 
+                          title={list.title} 
+                          cards={list.cards} 
+                          index={index}
+                          />
+                          ))}
+                          {provided.placeholder}
+                          <TrelloActionButton list />
+                          </ListContainer>
+                      )}
+                    </Droppable>    
+                </div>
+              </div>
+            </div>
+          </div>      
           </DragDropContext>
         );
       }

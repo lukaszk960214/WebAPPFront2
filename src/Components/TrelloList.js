@@ -4,13 +4,14 @@ import TrelloActionButton from "./TrelloActionButton";
 import {Droppable,Draggable} from "react-beautiful-dnd";
 import styled from "styled-components";
 
-const ListContainer =styled.div`
-    background-color:#dfe3e6;
-    border=rdius:3;
-    width:300px;
-    padding:8px;
+const ListContainer = styled.div`
+    background-color: #dfe3e6;
+    border-radius: 3px;
+    width: 300px;
+    padding: 8px;
     height: 100%;
-    margin-right:8px;
+    margin: 20px;
+    box-shadow: 2px 2px 4px grey;
 `;
 
 const TrelloList=({title, cards, listId,index})=> {

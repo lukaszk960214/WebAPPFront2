@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "@material-ui/core/Icon";
 import  Textarea from 'react-textarea-autosize';
-import { Card}  from "@material-ui/core";
+import { Card, rgbToHex}  from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {connect} from"react-redux";
 import {addList, addCard} from "../actions";
@@ -60,9 +60,10 @@ class TrelloActionButton extends React.Component {
        const {list} = this.props;
 
        const buttonText = list ? "Add another list" : "Add another card";
-       const buttonTextOpacity = list ? 1 : 0.5;
+       const buttonTextOpacity = list ? 1 : 0.7;
        const buttonTextColor = list ? "white" : "inherit";
        const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
+       
        return (
               <div 
               onClick={this.openForm}
@@ -71,11 +72,16 @@ class TrelloActionButton extends React.Component {
 
                   opacity: buttonTextOpacity,
                   color: buttonTextColor , 
-                  backgroundColor: buttonTextBackground
+                  backgroundColor: buttonTextBackground,
                 }}
                 >
                  <Icon>add</Icon>
-                    <p> {buttonText} </p>
+                    <p
+                    style = {{
+                        margin: "0px",
+                        color: "rgb(0,0,0)",
+                    }}
+                    > {buttonText} </p>
               </div>
        );
     };
@@ -135,14 +141,14 @@ const styles = {
     openFormButtonGroup: {
         display: "flex",
         alignItems: "center",
-        cursor:"pointer",
+        cursor: "pointer",
         borderRadius: 5,
         height: 36,
         width: 272,
-        paddingLeft: 10
+        paddingLeft: 10,
     },
     FormButtonGroup: {
-    marginTop:8,
+    marginTop: 8,
     display: "flex",
     alignItems : "center"
     }
