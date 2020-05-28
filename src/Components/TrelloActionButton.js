@@ -8,11 +8,15 @@ import {addList, addCard} from "../actions";
 
 class TrelloActionButton extends React.Component {
 
-    state = {
-        formOpen: false,
-        text: ""
-    };
-    openForm= () =>{
+    constructor(){
+        super();
+        this.state = {
+            formOpen: false,
+            text: "",
+        };
+    }
+
+    openForm = () => {
         this.setState({
             formOpen: true
         });
@@ -86,7 +90,7 @@ class TrelloActionButton extends React.Component {
        );
     };
 
-   renderForm = () =>{
+   renderForm = () => {
        const {list} = this.props;
 
        const placeholder = list 

@@ -53,12 +53,13 @@ class LoginPage extends React.Component {
         })
             .then(data  => {
                 this.setState({token: data.token});
+                localStorage.setItem('token', data.token);
                 console.log(data);
             }
         )
         .catch((error) => {
             console.log(error)
-        });;;
+        });
     }
  
  
@@ -71,8 +72,8 @@ class LoginPage extends React.Component {
     return (
         <div>
             <div>
-                <div class="row">
-                    <div class="col-sm">
+                <div className="row">
+                    <div className="col-sm">
                         <Link to="/register">Register</Link>
                     </div>
                 </div>

@@ -71,8 +71,8 @@ class RegisterPage extends React.Component {
     return (
         <div>
             <div>
-            <div class="row">
-                    <div class="col-sm">
+            <div className="row">
+                    <div className="col-sm">
                         <Link to="/login">Login</Link>
                     </div>
                 </div>
@@ -84,9 +84,9 @@ class RegisterPage extends React.Component {
                                 <h2 className="text-center">Register User</h2>
                                     <div className="form-group">
                                         <label className="text-uppercase">Username</label>
-                                        <input type="text" value= {this.state.username} className="form-control" onChange= {this.handleUsername}/>
+                                        <input type="text" value= {this.state.username} className="form-control" onChange = {this.handleUsername}/>
                                         <label className="text-uppercase">Password</label>
-                                        <input type="text" value= {this.state.password} className="form-control" onChange= {this.handlePassword}/>
+                                        <input type="text" value= {this.state.password} className="form-control" onChange = {this.handlePassword}/>
                                         <input type="submit" value="Register" className="btn btn-primary btn-login float-right" onClick = {this.login}/>
                                     </div>
                                 </form>
