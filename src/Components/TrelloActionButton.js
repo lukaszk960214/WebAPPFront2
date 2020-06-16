@@ -20,7 +20,8 @@ class TrelloActionButton extends React.Component {
         this.setState({
             formOpen: true
         });
-    }; 
+    };
+    
     closeForm = () =>{
         this.setState({
             formOpen: false

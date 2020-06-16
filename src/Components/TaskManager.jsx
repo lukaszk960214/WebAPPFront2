@@ -18,7 +18,9 @@ class TaskManager extends React.Component {
     super();
     this.state = {
       name: '',
-      userToken: localStorage.getItem('token')
+      userToken: localStorage.getItem('token'),
+      toDoName: '',
+      inProgress: ''
     };
     this.handleTableName = this.handleTableName.bind(this);
     this.addTableToDb = this.addTableToDb.bind(this);
@@ -48,6 +50,12 @@ class TaskManager extends React.Component {
       name: event.target.value
     })
   }
+  
+  handleInProgressName(event) {
+    this.setState({
+      inProgress: event.target.value
+    })
+  }
 
   addTableToDb() {
     console.log('Metoda odpalona');
@@ -71,12 +79,11 @@ class TaskManager extends React.Component {
 
 
   render() {
-
     const { lists } = this.props;
     return (
       <div className="container-fluid p-0">
-        <div className="row">
-          <div className="col">
+        <div className="row m-0">
+          <div className="col p-0">
             <header className="m-0 navbar bg-success">
               <h2 className="m-0 p-2 navbar-brand"><b className="text-light">task<span className="main-color">Manager</span></b></h2>
             </header>
