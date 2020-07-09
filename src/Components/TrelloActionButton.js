@@ -5,14 +5,17 @@ import { Card, rgbToHex}  from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {connect} from"react-redux";
 import {addList, addCard} from "../actions";
+import { Router, Route, browserHistory, IndexRoute} from 'react-router'
 
 class TrelloActionButton extends React.Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             formOpen: false,
             text: "",
+            userToken: localStorage.getItem('token')
+    
         };
     }
 
@@ -44,21 +47,107 @@ class TrelloActionButton extends React.Component {
             });
             dispatch(addList(text))
         }
+        
+        console.log(this.state.userToken);
+        var url = 'http://localhost:8080/list/?arrayId=' + this.props.tableId + '&listItemName='+this.state.text;
+        var bearer = 'Bearer ' + this.state.userToken;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': bearer,
+            },
+            body: null
+        }).then((response) => {
+            console.log('Succeed!');
+        }).catch((error) => {
+            console.log('Error during fetch user data');
+        });
 
         return;
     };
 
+    
+
     handleAddCard = () => {
         const {dispatch, listId}= this.props;
         const {text}=this.state;
+        console.log(this.props.listId)
+        if(text){
+            this.setState({
+                text: "",
+                strId: ""
+            });
+            dispatch(addCard(listId,text))
+        }
+        
+        var strId=this.props.listId;
+        console.log(listId)
+        var text2=String(strId).substring(7,8)
+        console.log(text2)
+        var url = 'http://localhost:8080/card/?cardName=' + this.state.text + '&listId='+text2;
+        console.log(url)
+        console.log(this.state.userToken);
+        var bearer = 'Bearer ' + this.state.userToken;
+        //http://localhost:8080/card/?cardName=test&listId=1
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': bearer,
+            },
+            body: null
+        }).then((response) => {
+            console.log('Succeed!');
+        }).catch((error) => {
+            console.log('Error during fetch user data');
+        });
+
+        return;
+        
+    };
+
+
+
+    getData = () => {
+        const {dispatch} = this.props;
+        const {text} = this.state;
 
         if(text){
             this.setState({
                 text: ""
             });
-            dispatch(addCard(listId,text))
+            dispatch(addList(text))
         }
+        
+        console.log(this.state.userToken);
+        var url = 'http://localhost:8080/list/?arrayId=' + this.props.tableId + '&listItemName='+this.state.text;
+        var bearer = 'Bearer ' + this.state.userToken;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': bearer,
+            },
+            body: null
+        }).then((response) => {
+            console.log('Succeed!');
+        }).catch((error) => {
+            console.log('Error during fetch user data');
+        });
+
+        return;
     };
+
+
+
+
+
 
 
     renderAddButton = () => {
@@ -124,10 +213,7 @@ class TrelloActionButton extends React.Component {
             />
           </Card>
           <div style={styles.formButtonGroup}>
-              <Button
-              onMouseDown={list ? this.handleAddList : this.handleAddCard}
-              variant="contained" style={{color: "white",backgroundColor: "#5aac44"}}
-              >
+              <Button onMouseDown={list ? this.handleAddList : this.handleAddCard} variant="contained" style={{color: "white",backgroundColor: "#5aac44"}}>
                   {buttonTitle}{" "} 
               </Button>
               <Icon style= {{marginLeft: 8,cursor:"pointer"}}>close</Icon>
@@ -137,6 +223,7 @@ class TrelloActionButton extends React.Component {
    };
 
    render(){
+       console.log(this.props)
     return this.state.formOpen ? this.renderForm() : this.renderAddButton()
         }
 

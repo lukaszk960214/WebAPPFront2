@@ -2,6 +2,7 @@ import React from 'react';
 import TaskManager from './TaskManager';
 import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';
+import ProjectsList from './ProjectsList';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 /*import {
   BrowserRouter as Router,
@@ -19,7 +20,8 @@ const App = () => {
       <Switch>
         <Route path="/login" exact component={LoginPage}/>
         <Route path="/register" component={RegisterPage}/>
-        <Route path="/taskmanager" component={TaskManager}/>
+        <Route path="/ProjectsList" component={ProjectsList}/>
+        <Route path="/taskmanager/:id" component={TaskManager} />
       </Switch>
     </HashRouter>
   );

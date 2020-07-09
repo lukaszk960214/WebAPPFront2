@@ -1,3 +1,12 @@
-header .main-color {
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+nav .main-color {
     color: #ffc107;
+}
+
+td:hover {
+    cursor: pointer;
+    color: white;
 }
