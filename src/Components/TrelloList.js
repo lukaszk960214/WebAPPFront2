@@ -29,7 +29,7 @@ const TrelloList = ({ title, cards, listId, index }) => {
                                     <TrelloCard
                                         key={card.id}
                                         index={index}
-                                        text={card.text}
+                                        text={card.name}
                                         id={card.id} />
                                 ))}
                                 <TrelloActionButton listId={listId} />

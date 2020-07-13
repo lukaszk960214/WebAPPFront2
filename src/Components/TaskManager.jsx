@@ -128,14 +128,10 @@ class TaskManager extends React.Component {
       console.log(this.state.list.length);
       this.state.list.map((list, listKey) => {
         dispatch(addList(list.name));
-        list.cards.map((card, cardKey) => {
-          dispatch(addCard(listKey, card.name));
-          console.log(card.name);
-        })
       })
+      console.log(this.state.list.cards);
       this.setState({ isFetched: true });
     }
-
   }
 
 
@@ -155,15 +151,15 @@ class TaskManager extends React.Component {
                   <Droppable droppableId="all-lists" direction="horizontal" type="list">
                     {provided => (
                       <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        {lists.map((list, index) => (
+                        {this.state.list.length !== 0 ? this.state.list.map((list, index) => (
                           <TrelloList
                             listId={list.id}
                             key={list.id}
-                            title={list.title}
+                            title={list.name}
                             cards={list.cards}
                             index={index}
                           />
-                        ))}
+                        )): null}
                         {provided.placeholder}
                         <TrelloActionButton list tableId={this.props.match.params.id} />
                       </ListContainer>

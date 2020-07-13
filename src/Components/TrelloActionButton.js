@@ -15,7 +15,6 @@ class TrelloActionButton extends React.Component {
             formOpen: false,
             text: "",
             userToken: localStorage.getItem('token')
-    
         };
     }
 
@@ -47,7 +46,6 @@ class TrelloActionButton extends React.Component {
             });
             dispatch(addList(text))
         }
-        
         console.log(this.state.userToken);
         var url = 'http://localhost:8080/list/?arrayId=' + this.props.tableId + '&listItemName='+this.state.text;
         var bearer = 'Bearer ' + this.state.userToken;
@@ -65,11 +63,8 @@ class TrelloActionButton extends React.Component {
         }).catch((error) => {
             console.log('Error during fetch user data');
         });
-
         return;
     };
-
-    
 
     handleAddCard = () => {
         const {dispatch, listId}= this.props;
@@ -87,7 +82,7 @@ class TrelloActionButton extends React.Component {
         console.log(listId)
         var text2=String(strId).substring(7,8)
         console.log(text2)
-        var url = 'http://localhost:8080/card/?cardName=' + this.state.text + '&listId='+text2;
+        var url = 'http://localhost:8080/card/?cardName=' + this.state.text + '&listId='+listId;
         console.log(url)
         console.log(this.state.userToken);
         var bearer = 'Bearer ' + this.state.userToken;
@@ -102,15 +97,12 @@ class TrelloActionButton extends React.Component {
             body: null
         }).then((response) => {
             console.log('Succeed!');
+            window.location.reload(false);
         }).catch((error) => {
             console.log('Error during fetch user data');
         });
-
-        return;
-        
+        return;  
     };
-
-
 
     getData = () => {
         const {dispatch} = this.props;
@@ -133,6 +125,7 @@ class TrelloActionButton extends React.Component {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'authorization': bearer,
+                
             },
             body: null
         }).then((response) => {
@@ -143,12 +136,6 @@ class TrelloActionButton extends React.Component {
 
         return;
     };
-
-
-
-
-
-
 
     renderAddButton = () => {
        const {list} = this.props;
@@ -208,15 +195,14 @@ class TrelloActionButton extends React.Component {
                 overflow: "hidden",
                 outline: "none",
                 border: "none"
-
             }}
             />
           </Card>
           <div style={styles.formButtonGroup}>
-              <Button onMouseDown={list ? this.handleAddList : this.handleAddCard} variant="contained" style={{color: "white",backgroundColor: "#5aac44"}}>
+              <Button onMouseDown={list ? this.handleAddList : this.handleAddCard} variant="contained" style={{color: "white",backgroundColor: "#5aac44",marginTop: "9px"}}>
                   {buttonTitle}{" "} 
               </Button>
-              <Icon style= {{marginLeft: 8,cursor:"pointer"}}>close</Icon>
+
           </div>
       </div>
       );
@@ -225,7 +211,7 @@ class TrelloActionButton extends React.Component {
    render(){
        console.log(this.props)
     return this.state.formOpen ? this.renderForm() : this.renderAddButton()
-        }
+    }
 
 }
 

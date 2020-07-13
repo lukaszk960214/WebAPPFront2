@@ -98,6 +98,7 @@ class ProjectsList extends React.Component {
             body: null
         }).then((response) => {
             console.log('Succeed!');
+            window.location.reload(false);
         }).catch((error) => {
             console.log('Error during fetch user data');
         });
@@ -110,7 +111,7 @@ class ProjectsList extends React.Component {
     render() {
         const { lists } = this.props;
         return (
-            <body>
+            <div>
                 <nav className="navbar navbar-expand-lg bg-success">
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
@@ -119,7 +120,7 @@ class ProjectsList extends React.Component {
                             </li>
                         </ul>
                         <div className="navbar-nav">
-                            <input type="text" class="form-control" placeholder="Project name..." value={this.state.name} onChange={this.handleTableName} />
+                            <input type="text" className="form-control" placeholder="Project name..." value={this.state.name} onChange={this.handleTableName} />
                             <div className="input-group-append">
                                 <button className="btn btn-warning" onClick={this.addTableToDb} type="submit">Add</button>
                             </div>
@@ -131,7 +132,7 @@ class ProjectsList extends React.Component {
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Board Name</th>
+                                <th scope="col">Board Name - {this.state.tickets.length} projects in total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,9 +143,8 @@ class ProjectsList extends React.Component {
                                 </tr>)}
                         </tbody>
                     </table>
-                    <h1>{this.state.tickets.length}</h1>
                 </div>
-            </body>
+            </div>
         );
     };
 }

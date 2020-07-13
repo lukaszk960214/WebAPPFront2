@@ -56,6 +56,7 @@ class LoginPage extends React.Component {
                 this.setState({ token: data.token });
                 localStorage.setItem('token', data.token);
                 console.log(data);
+                window.location.reload(false);
             }
             )
             .catch((error) => {
@@ -87,10 +88,10 @@ class LoginPage extends React.Component {
                     </div>
                     <section className="login-block">
                         <div className="container bg-warning p-5">
-                            <div class="wrapper fadeInDown">
+                            <div className="wrapper fadeInDown">
                                 <div id="formContent">
 
-                                    <div class="fadeIn first">
+                                    <div className="fadeIn first">
                                         <h1>LOGIN</h1>
                                     </div>
 
@@ -103,7 +104,7 @@ class LoginPage extends React.Component {
                                     </div>
 
                                     <div id="formFooter">
-                                        <a class="underlineHover" href="#">Forgot Password?</a>
+                                        <a className="underlineHover" href="#">Forgot Password?</a>
                                     </div>
 
                                 </div>

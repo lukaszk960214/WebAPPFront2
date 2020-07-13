@@ -1,4 +1,3 @@
-
 import { CONSTANTS } from "../actions";
 import { Droppable } from "react-beautiful-dnd";
 let listId = 1;
@@ -12,7 +11,7 @@ const listsReducer = (state = initialState, action) => {
             const newList = {
                 title: action.payload,
                 cards: [],
-                id: 'list-${' + listId + '}'
+                id: listId
             }
             listId += 1;
             return [...state, newList];
@@ -20,7 +19,7 @@ const listsReducer = (state = initialState, action) => {
         case CONSTANTS.ADD_CARD: {
             const newCard = {
                 text: action.payload.text,
-                id: 'card-${' + cardID + '}'
+                id: cardID
             }
             cardID += 1;
 
